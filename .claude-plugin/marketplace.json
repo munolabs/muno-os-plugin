@@ -1,0 +1,19 @@
+{
+  "name": "Muno-OS (beta)",
+  "owner": {
+    "name": "Muno Labs",
+    "email": "fb@munolabs.com"
+  },
+  "metadata": {
+    "description": "Skills para agencias de software y equipos de tecnologia en LATAM",
+    "version": "0.9.0-beta"
+  },
+  "plugins": [
+    {
+      "name": "Muno-OS (beta)",
+      "source": ".",
+      "description": "Skills y herramientas para agencias de software y equipos de tecnologia: conciliacion bancaria, indicadores economicos, gestion de proyectos, diseno, contenido y mas. Optimizado para operaciones en LATAM.",
+      "version": "0.9.0-beta"
+    }
+  ]
+}

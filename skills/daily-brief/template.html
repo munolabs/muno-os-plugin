@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="{{LOCALE}}">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Brief — {{DATE_SHORT}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* --- Reset & Base --- */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #0C0E19;
+      --bg-card:     #13172A;
+      --bg-card-2:   #181D32;
+      --accent:      {{COLOR_PRIMARY}};
+      --accent-dim:  {{COLOR_PRIMARY}}1F;
+      --accent-faint:{{COLOR_PRIMARY}}0F;
+      --blue:        {{COLOR_SECONDARY}};
+      --blue-light:  {{COLOR_SECONDARY}};
+      --text:        #F0F4FF;
+      --text-muted:  rgba(240, 244, 255, 0.45);
+      --text-soft:   rgba(240, 244, 255, 0.70);
+      --border:      {{COLOR_PRIMARY}}1A;
+      --border-soft: rgba(255, 255, 255, 0.06);
+      --yellow:      #F5C542;
+      --yellow-dim:  rgba(245, 197, 66, 0.12);
+      --red:         #FF5F5F;
+      --red-dim:     rgba(255, 95, 95, 0.12);
+      --green:       #8DEDCF;
+      --green-dim:   rgba(141, 237, 207, 0.12);
+      --radius:      10px;
+      --radius-sm:   6px;
+      --gap:         20px;
+    }
+
+    html { background: var(--bg); color: var(--text); font-family: 'Geist', -apple-system, sans-serif; font-size: 14px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    body { max-width: 960px; margin: 0 auto; padding: 32px 24px 64px; }
+
+    /* --- Typography --- */
+    .label { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+    .label-muted { font-size: 10px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--text-muted); }
+    h1 { font-size: 22px; font-weight: 700; color: var(--text); }
+    h2 { font-size: 13px; font-weight: 600; color: var(--text); }
+    p  { color: var(--text-soft); font-size: 13px; }
+
+    /* --- Layout --- */
+    .grid-2  { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+    .grid-3  { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: var(--gap); }
+    .grid-4  { display: grid; grid-template-columns: repeat(4,1fr); gap: var(--gap); }
+    .stack   { display: flex; flex-direction: column; gap: 10px; }
+    .row     { display: flex; align-items: center; gap: 8px; }
+    .spacer  { height: 28px; }
+    .divider { height: 1px; background: var(--border-soft); margin: 6px 0; }
+
+    /* --- Cards --- */
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 20px; }
+    .card-flat { background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 18px 20px; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+
+    /* --- Stat Cards --- */
+    .stat-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; }
+    .stat-value { font-size: 24px; font-weight: 700; color: var(--text); line-height: 1.1; font-family: 'Geist Mono', monospace; }
+    .stat-value.teal  { color: var(--accent); }
+    .stat-value.blue  { color: var(--blue); }
+    .stat-value.red   { color: var(--red); }
+    .stat-value.yellow{ color: var(--yellow); }
+    .stat-delta { font-size: 11px; font-family: 'Geist Mono', monospace; color: var(--text-muted); }
+    .stat-delta.up   { color: var(--green); }
+    .stat-delta.down { color: var(--red); }
+
+    /* --- Badges --- */
+    .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 4px; white-space: nowrap; }
+    .badge-teal   { background: var(--accent-dim);   color: var(--accent); }
+    .badge-blue   { background: rgba(77,158,255,.12); color: var(--blue); }
+    .badge-yellow { background: var(--yellow-dim); color: var(--yellow); }
+    .badge-red    { background: var(--red-dim);    color: var(--red); }
+    .badge-muted  { background: rgba(255,255,255,.06); color: var(--text-muted); }
+
+    /* --- List Items --- */
+    .item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border-soft); }
+    .item:last-child { border-bottom: none; padding-bottom: 0; }
+    .item:first-child { padding-top: 0; }
+    .item-icon { width: 28px; height: 28px; border-radius: var(--radius-sm); background: var(--accent-faint); border: 1px solid var(--accent-dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; color: var(--accent); font-family: 'Geist Mono', monospace; font-weight: 600; }
+    .item-body { flex: 1; min-width: 0; }
+    .item-title { font-size: 13px; font-weight: 500; color: var(--text); }
+    .item-meta  { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    /* --- Timeline --- */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item { display: flex; gap: 14px; padding: 10px 0; position: relative; }
+    .timeline-item:not(:last-child)::after { content: ''; position: absolute; left: 26px; top: 42px; bottom: -2px; width: 1px; background: var(--border-soft); }
+    .timeline-time { width: 52px; font-size: 11px; font-family: 'Geist Mono', monospace; color: var(--text-muted); text-align: right; padding-top: 2px; flex-shrink: 0; }
+    .timeline-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; position: relative; z-index: 1; }
+    .timeline-dot.meeting { background: var(--blue); }
+    .timeline-dot.task    { background: var(--yellow); }
+    .timeline-content { flex: 1; }
+    .timeline-title { font-size: 13px; font-weight: 500; color: var(--text); }
+    .timeline-sub   { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    /* --- Progress Bar --- */
+    .progress-bar { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; overflow: hidden; margin-top: 8px; }
+    .progress-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--accent), var(--blue)); }
+
+    /* --- Alert --- */
+    .alert { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: var(--radius-sm); background: var(--red-dim); border: 1px solid rgba(255,95,95,0.20); margin-bottom: 8px; }
+    .alert.warning { background: var(--yellow-dim); border-color: rgba(245,197,66,0.20); }
+    .alert.info { background: var(--accent-faint); border-color: var(--accent-dim); }
+    .alert-icon { font-size: 14px; flex-shrink: 0; line-height: 1.5; }
+    .alert-body { flex: 1; }
+    .alert-title { font-size: 13px; font-weight: 500; color: var(--text); }
+    .alert-desc  { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+
+    /* --- Header --- */
+    .briefing-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-soft); }
+    .briefing-date { font-size: 11px; color: var(--text-muted); text-align: right; }
+    .briefing-date strong { display: block; font-size: 13px; font-weight: 500; color: var(--text-soft); margin-bottom: 2px; }
+
+    /* --- Section --- */
+    .section-title { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border-soft); }
+
+    /* --- Project Row --- */
+    .project-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border-soft); }
+    .project-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .project-row:first-child { padding-top: 0; }
+    .project-name { flex: 1; font-size: 13px; font-weight: 500; color: var(--text); }
+    .project-owner { font-size: 11px; color: var(--text-muted); }
+
+    /* --- Cashflow Row --- */
+    .cf-row { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; border-bottom: 1px solid var(--border-soft); }
+    .cf-row:last-child { border-bottom: none; }
+    .cf-label { font-size: 12px; color: var(--text-soft); }
+    .cf-value { font-size: 13px; font-weight: 600; font-family: 'Geist Mono', monospace; }
+    .cf-value.positive { color: var(--green); }
+    .cf-value.negative { color: var(--red); }
+    .cf-value.neutral  { color: var(--text); }
+
+    /* --- Quote --- */
+    .quote-block { padding: 16px 20px; border-left: 3px solid var(--accent); background: var(--accent-faint); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+    .quote-text { font-size: 13px; font-style: italic; color: var(--text-soft); line-height: 1.6; }
+    .quote-author { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+
+    .mono { font-family: 'Geist Mono', monospace; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="briefing-header">
+    <div>
+      <h1>Daily Brief</h1>
+      <p style="margin-top:4px; font-size:13px;">{{GREETING}}</p>
+    </div>
+    <div class="briefing-date">
+      <strong>{{DIA_SEMANA}}, {{FECHA_LARGA}}</strong>
+      {{HORA}} {{TZ_LABEL}}
+    </div>
+  </header>
+
+  <!-- QUOTE (optional) -->
+  {{QUOTE_HTML}}
+
+  <!-- STATS (optional) -->
+  {{STATS_HTML}}
+
+  <!-- ALERTS (optional) -->
+  {{ALERTS_HTML}}
+
+  <!-- DYNAMIC SECTIONS -->
+  {{SECTIONS_HTML}}
+
+  <!-- SOURCES -->
+  <div class="section-title">
+    <span class="label">{{SOURCES_LABEL}}</span>
+  </div>
+  <div class="card-flat" style="padding: 14px 20px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+      {{SOURCES_HTML}}
+    </div>
+    <div style="margin-top: 10px; font-size: 10px; color: var(--text-muted); font-family: 'Geist Mono', monospace;">
+      {{GENERATED_LABEL}}: {{HORA}} {{TZ_LABEL}} &middot; {{FECHA_LARGA}}
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <!-- FOOTER -->
+  <footer style="text-align:center; padding-top:32px; border-top:1px solid var(--border-soft);">
+    <div style="font-size:11px; color:var(--text-muted);">Daily Brief &middot; Powered by Claude Code</div>
+  </footer>
+
+</body>
+</html>

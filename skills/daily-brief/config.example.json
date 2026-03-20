@@ -1,0 +1,28 @@
+{
+  "name": "Tu Nombre",
+  "timezone": "America/Bogota",
+  "locale": "es",
+  "brand": {
+    "primary": "#8DEDCF",
+    "secondary": "#4D9EFF",
+    "logo": null
+  },
+  "sections": {
+    "greeting": { "enabled": true },
+    "quote": { "enabled": true, "source": "zenquotes" },
+    "tasks": { "enabled": true, "path": "brain/to-do.md" },
+    "journal": { "enabled": false, "path": "brain/journal.md" },
+    "finance": { "enabled": false, "indicators": ["trm"] },
+    "projects": { "enabled": false },
+    "email": { "enabled": false },
+    "calendar": { "enabled": false },
+    "custom": { "enabled": false, "prompt": "Top 5 de Hacker News" }
+  },
+  "section_order": ["greeting", "quote", "tasks", "journal", "finance", "projects", "email", "calendar", "custom"],
+  "output": {
+    "dir": "daily-reports",
+    "open_browser": true
+  },
+  "dismissed_suggestions": [],
+  "usage_count": 0
+}

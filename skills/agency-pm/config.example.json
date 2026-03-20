@@ -1,0 +1,23 @@
+{
+  "_instrucciones": "Copiá este archivo como config.json y completá con los datos de tu agencia.",
+
+  "agency_name": "Nombre de tu agencia",
+
+  "tiers": {
+    "tier1_revenue_threshold": "Ej: >$5K USD/mes  —  ajustar según tu contexto",
+    "tier1_owners": ["Nombre socio 1", "Nombre socio 2"],
+    "tier2_owners": ["Pueden ser líderes técnicos o PMs senior"]
+  },
+
+  "tools": {
+    "linear": true,
+    "notion": true,
+    "slack": false
+  },
+
+  "defaults": {
+    "currency": "USD",
+    "report_language": "es",
+    "weekly_report_day": "viernes"
+  }
+}

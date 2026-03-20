@@ -1,0 +1,11 @@
+{
+  "name": "Muno-OS (beta)",
+  "description": "Skills y herramientas para agencias de software y equipos de tecnologia: conciliacion bancaria, indicadores economicos, gestion de proyectos, diseno, contenido y mas. Optimizado para operaciones en LATAM.",
+  "version": "0.9.0-beta",
+  "author": {
+    "name": "Muno Labs",
+    "url": "https://munolabs.com"
+  },
+  "repository": "https://github.com/munolabs/muno-os-plugin",
+  "license": "MIT"
+}

@@ -1,0 +1,48 @@
+{
+  "_instrucciones": "Copiá este archivo como config.json en la misma carpeta y completá con tu información. Claude lo leerá cada vez que uses el skill.",
+
+  "autor": "Tu nombre o handle",
+  "industria": "Ej: Software / IA / Fintech / Salud digital",
+  "rol": "Ej: CEO, CTO, Founder, PM, Developer",
+
+  "audiencia": {
+    "linkedin": "Describe tu audiencia principal en LinkedIn. Ej: Founders latinoamericanos de tech, 1K-10K seguidores",
+    "twitter": "Describe tu audiencia en Twitter/X. Ej: Developers y builders en inglés"
+  },
+
+  "fuentes": [
+    "Ej: Lenny's Newsletter",
+    "Ej: Hacker News",
+    "Ej: Every.to",
+    "Ej: Twitter/X tech",
+    "Ej: Nombre de un newsletter de tu industria"
+  ],
+
+  "referencias_estilo": [
+    "Ej: Tomás Tunguz — data-driven, empieza con un número, cierra con 'what I'm watching'",
+    "Ej: Packy McCormick — narrativo, analogías inesperadas, largo",
+    "Ej: Describe el estilo de alguien que escriba como querés escribir vos"
+  ],
+
+  "temas_frecuentes": [
+    "Ej: IA aplicada a negocios",
+    "Ej: Gestión de equipos remotos",
+    "Ej: Ventas B2B en Latinoamérica"
+  ],
+
+  "temas_off_limits": [
+    "Ej: Política",
+    "Ej: Religión"
+  ],
+
+  "idioma_linkedin": "español",
+  "idioma_twitter": "inglés",
+
+  "ejemplos_propios": [
+    {
+      "descripcion": "Opcional: pegá un post tuyo que funcionó bien para que Claude aprenda tu voz",
+      "plataforma": "linkedin",
+      "texto": "..."
+    }
+  ]
+}
